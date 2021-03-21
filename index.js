@@ -1,4 +1,4 @@
-import Reactfrom 'react';
+import React from 'react';
 import { View, Text, Button } from 'react-native';
 
 export default class App extends Component<{}> {
