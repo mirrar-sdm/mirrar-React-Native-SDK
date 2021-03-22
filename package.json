@@ -11,5 +11,8 @@
     "sdk"
   ],
   "author": "StyleDotMe",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "react-native-webview": "^11.3.1"
+  }
 }
