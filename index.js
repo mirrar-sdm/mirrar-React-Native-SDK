@@ -116,7 +116,11 @@ render(){
 
           <View style={{ flex: 1, padding: 0 }}>
               {this.state.isLoading ? <Text>Loading...</Text> :
-              (<WebView source={{ uri: this.state.basicUrl }} style={{ marginTop: 20 }} />
+              (<WebView 
+			geolocationEnabled={true}
+			mediaPlaybackRequiresUserAction={false}
+			javaScriptEnabled={true}
+			source={{ uri: this.state.basicUrl }} style={{ marginTop: 20 }} />
               )}
             </View>
       );
