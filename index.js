@@ -1,7 +1,7 @@
 import React, { useEffect, useState, Component  } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import WebView from 'react-native-webview'
-//import { userName,password,jsonData } from './constants'
+import { userName,password,jsonData } from './constants'
 
 export default class App extends Component {
 
@@ -9,6 +9,9 @@ export default class App extends Component {
      basicUrl : 'test' ,
      isLoading:true,
   }
+
+  //console.log(data.description);
+  //console.log(data.articles);
 
  constructor(props){
     super(props);
@@ -21,19 +24,11 @@ export default class App extends Component {
 
 componentDidMount(){
 
-  	 const { navigation } = this.props;
-   	 const username = navigation.getParam('userName', 'NO-User');
-   	 const password = navigation.getParam('otherParam', 'some default value');
-	 const jsondata= navigation.getParam('jsonData', 'some default value');
-
-var body="username="+username+"&password="+password+"&type=android_sdk";
-
-
 var keysArray = [] ;
 var valuesArray = [] ;
 
+    var jsonData ="{\"options\": {\"productData\": {\"Earrings\": {\"items\": [\"513319NDJAA40\",\"504002SHXABA02\",\"504002JGSABA02\",\"504002SQBABA02\",\"504002HQGAAA02\"],\"type\": \"ear\"}}}}";
 
-    var jsonData =jsondata;
 
   console.log('check log');
 
@@ -42,7 +37,7 @@ fetch("https://m.mirrar.com//api/v1/login", {
   headers: new Headers({
              'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
     }),
-  body: body // <-- Post parameters
+  body: "username=tanishqwebar&password=w4y0EihepyIAA50U&type=android_sdk" // <-- Post parameters
 })
 .then((response) => response.json())
 .then((json) => {
@@ -116,16 +111,20 @@ this.setState({
 
 
 render(){
-
+  	 const { navigation } = this.props;
+   	 const username = navigation.getParam('userName', 'NO-User');
+   	 const password = navigation.getParam('otherParam', 'some default value');
+	 const jsondata= navigation.getParam('jsonData', 'some default value');
       return (
 
           <View style={{ flex: 1, padding: 0 }}>
-              {this.state.isLoading ? <Text>Loading...</Text> :
+              {this.state.isLoading ? <Text style={{textAlignVertical: "center",textAlign: "center",}}>Loading...</Text>
+ :
               (<WebView 
 			geolocationEnabled={true}
 			mediaPlaybackRequiresUserAction={false}
 			javaScriptEnabled={true}
-			source={{ uri: this.state.basicUrl }} style={{ marginTop: 20 }} />
+			source={{ uri: this.state.basicUrl }} style={{ marginTop: 0 }} />
               )}
             </View>
       );
