@@ -22,5 +22,4 @@ Virtual jewellery try-on SDK
                                                        jsonData: "{\"options\": {\"productData\": {\"Earrings\": {\"items\": [\"513319NDJAA40\",\"504002SHXABA02\",\"504002JGSABA02\",\"504002SQBABA02\",\"504002HQGAAA02\"],\"type\": \"ear\"}}}}",
                                                    })}
 
-4. Make sure to give permission of camera before navigating to the sdk
 
