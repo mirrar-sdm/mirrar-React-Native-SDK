@@ -10,8 +10,6 @@ export default class App extends Component {
      isLoading:true,
   }
 
-  //console.log(data.description);
-  //console.log(data.articles);
 
  constructor(props){
     super(props);
@@ -26,8 +24,14 @@ componentDidMount(){
 
 var keysArray = [] ;
 var valuesArray = [] ;
+ const { navigation } = this.props;
+   	 const username = navigation.getParam('userName', 'NO-User');
+   	 const password = navigation.getParam('password', 'some default value');
+   	 var jsonData= navigation.getParam('jsonData', 'some default value');
 
-    var jsonData ="{\"options\": {\"productData\": {\"Earrings\": {\"items\": [\"513319NDJAA40\",\"504002SHXABA02\",\"504002JGSABA02\",\"504002SQBABA02\",\"504002HQGAAA02\"],\"type\": \"ear\"}}}}";
+   var body="username="+username+"&password="+password+"&type=android_sdk";
+
+  //  var jsonData ="{\"options\": {\"productData\": {\"Earrings\": {\"items\": [\"513319NDJAA40\",\"504002SHXABA02\",\"504002JGSABA02\",\"504002SQBABA02\",\"504002HQGAAA02\"],\"type\": \"ear\"}}}}";
 
 
   console.log('check log');
@@ -37,7 +41,7 @@ fetch("https://m.mirrar.com//api/v1/login", {
   headers: new Headers({
              'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
     }),
-  body: "username=tanishqwebar&password=w4y0EihepyIAA50U&type=android_sdk" // <-- Post parameters
+  body: body // <-- Post parameters
 })
 .then((response) => response.json())
 .then((json) => {
@@ -111,14 +115,12 @@ this.setState({
 
 
 render(){
-  	 const { navigation } = this.props;
-   	 const username = navigation.getParam('userName', 'NO-User');
-   	 const password = navigation.getParam('password', 'some default value');
-	 const jsondata= navigation.getParam('jsonData', 'some default value');
+  	
+
       return (
 
           <View style={{ flex: 1, padding: 0 }}>
-              {this.state.isLoading ? <Text style={{textAlignVertical: "center",textAlign: "center",}}>Loading...</Text>
+              {this.state.isLoading ? <Text>Loading...</Text> :
  :
               (<WebView 
 			geolocationEnabled={true}
