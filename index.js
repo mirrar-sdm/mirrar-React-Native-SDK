@@ -113,7 +113,7 @@ this.setState({
 render(){
   	 const { navigation } = this.props;
    	 const username = navigation.getParam('userName', 'NO-User');
-   	 const password = navigation.getParam('otherParam', 'some default value');
+   	 const password = navigation.getParam('password', 'some default value');
 	 const jsondata= navigation.getParam('jsonData', 'some default value');
       return (
 
