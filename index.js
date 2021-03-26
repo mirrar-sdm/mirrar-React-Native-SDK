@@ -34,7 +34,7 @@ var valuesArray = [] ;
   //  var jsonData ="{\"options\": {\"productData\": {\"Earrings\": {\"items\": [\"513319NDJAA40\",\"504002SHXABA02\",\"504002JGSABA02\",\"504002SQBABA02\",\"504002HQGAAA02\"],\"type\": \"ear\"}}}}";
 
 
-  console.log('check log');
+  console.log('check log'+body);
 
 fetch("https://m.mirrar.com//api/v1/login", {
   method: 'POST',
@@ -42,10 +42,16 @@ fetch("https://m.mirrar.com//api/v1/login", {
              'Content-Type': 'application/x-www-form-urlencoded', // <-- Specifying the Content-Type
     }),
   body: body // <-- Post parameters
-})
-.then((response) => response.json())
-.then((json) => {
-
+}).then(response => {
+    console.log(response);
+    if (!response.ok) {
+        Alert.alert('ERROR', 'Username or password is incorrect');
+      
+    } else {
+       
+        return response.json().then(json => {
+        
+             console.log("json"+json);
     console.log(Object.keys(json.data.active_product_codes).length);
     //console.log(Object.values(json.data.active_product_codes)[1].size);
 
@@ -105,6 +111,8 @@ this.setState({
        basicUrl :baseUrl,
        isLoading:false,
       });
+        });
+    }
 })
 .catch((error) => {
     console.error(error);
