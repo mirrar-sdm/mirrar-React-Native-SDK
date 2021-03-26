@@ -9,10 +9,10 @@ export default class FirstPage extends Component {
     title: 'MirrarSDK Example',
     //Sets Header text of Status Bar
     headerStyle: {
-      backgroundColor: '#FFC0CB',
+      backgroundColor: '#e0115f',
       //Sets Header color
     },
-    headerTintColor: '#fff',
+    headerTintColor: 'white',
     //Sets Header text color
     headerTitleStyle: {
       fontWeight: 'bold',
@@ -52,10 +52,11 @@ componentDidMount(){
 
     return (
       <View style={styles.container}>
-        <Button title='Launch Mirrar'
+        <Button color="#e0115f"
+        title='Launch Mirrar'
         onPress={() =>this.props.navigation.navigate('SecondPage', {
                                                        userName: 'tanishqwebar',
-                                                       otherParam: 'w4y0EihepyIAA50U',
+                                                       password: 'w4y0EihepyIAA50U',
                                                        jsonData: "{\"options\": {\"productData\": {\"Earrings\": {\"items\": [\"513319NDJAA40\",\"504002SHXABA02\",\"504002JGSABA02\",\"504002SQBABA02\",\"504002HQGAAA02\"],\"type\": \"ear\"}}}}",
                                                    })}
         />
@@ -66,7 +67,7 @@ componentDidMount(){
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'black',
     alignItems: 'center',
     justifyContent: 'center',
   },

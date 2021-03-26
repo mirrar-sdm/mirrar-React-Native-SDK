@@ -127,8 +127,15 @@ render(){
 
       return (
 
-          <View style={{ flex: 1, padding: 0 }}>
-              {this.state.isLoading ? <Text style={{textAlignVertical: "center",textAlign: "center",}}>Hiiiz</Text>
+          <View style={{ flex: 1, padding: 0, }}>
+              {this.state.isLoading ? <Text style={{
+                                                backgroundColor: 'black',
+                                                position: 'absolute',
+                                                fontSize: 18,
+                                                top: 0, left: 0,
+                                                right: 0, bottom: 0,
+                                                textAlignVertical: "center",textAlign: "center",
+                                                alignItems: 'center'}}>Loading...</Text>
  :
               (<WebView 
 			geolocationEnabled={true}
