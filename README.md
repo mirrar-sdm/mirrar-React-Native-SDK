@@ -10,7 +10,7 @@ Virtual jewellery try-on SDK
       npm i react-native-webview
 
 2.       
-    Add these twp permissions in manifest.xml 
+    Add these two permission in manifest.xml 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
 

@@ -20,33 +20,6 @@ export default class FirstPage extends Component {
     },
   };
 
-
-componentDidMount(){
-
- async () => {
-      // We need to ask permission for Android only
-      if (Platform.OS === 'android') {
-           // Calling the permission function
-           const granted = await PermissionsAndroid.request(
-             PermissionsAndroid.PERMISSIONS.CAMERA,
-             {
-               title: 'Example App Camera Permission',
-               message: 'Example App needs access to your camera',
-             },
-           );
-           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-             // Permission Granted
-             proceed();
-           } else {
-             // Permission Denied
-             alert('CAMERA Permission Denied');
-           }
-         } else {
-           proceed();
-         }
-    };
-
-    }
   render() {
     const { navigate } = this.props.navigation;
 

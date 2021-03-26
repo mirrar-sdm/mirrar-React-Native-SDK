@@ -1,5 +1,5 @@
 import React, { useEffect, useState, Component  } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import { FlatList, Text, View,PermissionsAndroid  } from 'react-native';
 import WebView from 'react-native-webview'
 import { userName,password,jsonData } from './constants'
 
@@ -20,8 +20,7 @@ export default class App extends Component {
 
   }
 
-componentDidMount(){
-
+getValues(){
 var keysArray = [] ;
 var valuesArray = [] ;
  const { navigation } = this.props;
@@ -46,11 +45,11 @@ fetch("https://m.mirrar.com//api/v1/login", {
     console.log(response);
     if (!response.ok) {
         Alert.alert('ERROR', 'Username or password is incorrect');
-      
+
     } else {
-       
+
         return response.json().then(json => {
-        
+
              console.log("json"+json);
     console.log(Object.keys(json.data.active_product_codes).length);
     //console.log(Object.values(json.data.active_product_codes)[1].size);
@@ -117,6 +116,38 @@ this.setState({
 .catch((error) => {
     console.error(error);
 });
+
+
+}
+ async componentDidMount(){
+    console.log("Test1");
+
+      // We need to ask permission for Android only
+      if (Platform.OS === 'android') {
+      console.log("Test2");
+           // Calling the permission function
+           const granted = await PermissionsAndroid.request(
+             PermissionsAndroid.PERMISSIONS.CAMERA,
+             {
+               title: 'Mirrar SDK Camera Permission',
+               message: 'Mirrar SDK needs access to your camera',
+             },
+           );
+           if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+             // Permission Granted
+                console.log("Test3");
+             this.getValues();
+             proceed();
+           } else {
+              console.log("Test4");
+             // Permission Denied
+             alert('CAMERA Permission Denied');
+           }
+         } else {
+             console.log("Test5");
+            this.getValues();
+           proceed();
+         }
 
 
 }
