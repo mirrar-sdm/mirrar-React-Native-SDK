@@ -27,11 +27,7 @@ export default class FirstPage extends Component {
       <View style={styles.container}>
         <Button color="#e0115f"
         title='Launch Mirrar'
-        onPress={() =>this.props.navigation.navigate('SecondPage', {
-                                                       userName: 'tanishqwebar',
-                                                       password: 'w4y0EihepyIAA50U',
-                                                       jsonData: "{\"options\": {\"productData\": {\"Earrings\": {\"items\": [\"513319NDJAA40\",\"504002SHXABA02\",\"504002JGSABA02\",\"504002SQBABA02\",\"504002HQGAAA02\"],\"type\": \"ear\"}}}}",
-                                                   })}
+        onPress={() =>this.props.navigation.navigate('SecondPage')}
         />
       </View>
     );
