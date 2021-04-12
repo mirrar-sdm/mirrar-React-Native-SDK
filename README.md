@@ -6,20 +6,27 @@ Virtual jewellery try-on SDK
 - Steps to integrate
 
 1. Install the package 
+      ```
       npm install git+https://github.com/shivammaindola/react-native-mirrar-sdk.git
-      npm i react-native-webview
+      npm install
+      ```
 
 2.       
-    Add these two permission in manifest.xml 
+    Add these two permission in manifest.xml in android section
+    ```
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    ```
 
-3. Add 3 arguments in navigate function like this- 
+3. Add import statement
+ 	```import MirrarSDK from 'react-native-mirrar-sdk';```
 
-									navigate('SecondPage', {
-                                                       userName: '',
-                                                       password: '',
-                                                       jsonData: "{\"options\": {\"productData\": {\"Earrings\": {\"items\": [\"513319NDJAA40\",\"504002SHXABA02\",\"504002JGSABA02\",\"504002SQBABA02\",\"504002HQGAAA02\"],\"type\": \"ear\"}}}}",
-                                                   })}
+5. Add this code inside a view 
+
+       <MirrarSDK
+         username=''
+         password=''
+         data=''
+        />
 
 
