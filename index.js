@@ -28,10 +28,6 @@ export default class App extends Component {
     var body =
       "username=" + username + "&password=" + password + "&type=android_sdk";
 
-    //  var jsonData ="{\"options\": {\"productData\": {\"Earrings\": {\"items\": [\"513319NDJAA40\",\"504002SHXABA02\",\"504002JGSABA02\",\"504002SQBABA02\",\"504002HQGAAA02\"],\"type\": \"ear\"}}}}";
-
-    console.log("check log" + body);
-
     fetch("https://m.mirrar.com//api/v1/login", {
       method: "POST",
       headers: new Headers({
@@ -40,17 +36,14 @@ export default class App extends Component {
       body: body, // <-- Post parameters
     })
       .then((response) => {
-        console.log(response);
+        
         if (!response.ok) {
           Alert.alert("ERROR", "Username or password is incorrect");
         } else {
           return response.json().then((json) => {
-            console.log("json" + json);
-            console.log(Object.keys(json.data.active_product_codes).length);
-            //console.log(Object.values(json.data.active_product_codes)[1].size);
+            c
 
             var userData = JSON.parse(jsonData);
-            console.log(userData.options.productData);
             var length1 = Object.keys(json.data.active_product_codes).length;
 
             var apiKeys = Object.keys(json.data.active_product_codes);
@@ -59,8 +52,6 @@ export default class App extends Component {
             var userKeys = Object.keys(userData.options.productData);
             var userValues = Object.values(userData.options.productData);
 
-            console.log("start");
-            console.log(userValues[0].items[0]);
             for (let i = 0; i < userKeys.length; i++) {
               for (let j = 0; j < apiKeys.length; j++) {
                 if (userKeys[i] == apiKeys[j]) {
@@ -71,7 +62,6 @@ export default class App extends Component {
                   for (let k = 0; k < userValues[i].items.length; k++) {
                     for (let x = 0; x < apiValues[j].items.length; x++) {
                       if (userValues[i].items[k] == apiValues[j].items[x]) {
-                        console.log(userValues[i].items[k]);
                         valueArray.push(userValues[i].items[k]);
                       }
                     }
@@ -91,7 +81,6 @@ export default class App extends Component {
                 codes.push(valuesArray[i][j]);
               }
             }
-            console.log(codes);
 
             var csv = codes
               .toString()
@@ -104,7 +93,6 @@ export default class App extends Component {
               csv +
               "&sku=" +
               codes[1].replace("=,", "=").replace(",&", "&");
-            console.log(baseUrl);
             this.setState({
               basicUrl: baseUrl,
               isLoading: false,
