@@ -24,9 +24,8 @@ Virtual jewellery try-on SDK
 5. Add this code inside a view 
 
        <MirrarSDK
-         username=''
-         password=''
          data=''
+         uuid=''
         />
 
 

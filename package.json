@@ -1,6 +1,6 @@
 {
   "name": "react-native-mirrar-sdk",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Virtual Jewellery try-on app Sdk",
   "main": "index.js",
   "scripts": {
@@ -13,6 +13,7 @@
   "author": "StyleDotMe",
   "license": "ISC",
   "dependencies": {
+    "react-native-event-listeners": "^1.0.7",
     "react-native-webview": "^11.3.1"
   }
 }

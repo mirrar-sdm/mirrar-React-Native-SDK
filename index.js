@@ -1,140 +1,139 @@
-import React, { useEffect, useState, Component } from "react";
-import { FlatList, Text, View } from "react-native";
-import WebView from "react-native-webview";
-import { userName, password, jsonData } from "./constants";
+import React, { useEffect, useState, Component  } from 'react';
+import { FlatList, Text, View } from 'react-native';
+import WebView from 'react-native-webview'
+import { userName,password,jsonData } from './constants'
+import { EventRegister } from 'react-native-event-listeners'
 
 export default class App extends Component {
-  state = {
-    basicUrl: "test",
-    isLoading: true,
-  };
 
-  constructor(props) {
+  state={
+     basicUrl : 'test' ,
+     isLoading:true,
+  }
+
+
+ constructor(props){
     super(props);
     this.state = {
-      basicUrl: "test",
-      isLoading: true,
-    };
+        basicUrl : 'test' ,
+        isLoading:true,
+      }
+
   }
 
-  componentDidMount() {
-    var keysArray = [];
+componentDidMount(){
+
+
+    const uuid = this.props.uuid;
+    var jsonData = this.props.data;
+var keysArray = [] ;
+var valuesArray = [] ;
+ var keysArray = [];
     var valuesArray = [];
 
-    const username = this.props.username;
-    const password = this.props.password;
-    var jsonData = this.props.data;
+  //  var jsonData ="{\"options\": {\"productData\": {\"Earrings\": {\"items\": [\"513319NDJAA40\",\"504002SHXABA02\",\"504002JGSABA02\",\"504002SQBABA02\",\"504002HQGAAA02\"],\"type\": \"ear\"}}}}";
 
-    var body =
-      "username=" + username + "&password=" + password + "&type=android_sdk";
+    var userData = JSON.parse(jsonData);
+    var userKeys=Object.keys(userData.options.productData);
+    var userValues=Object.values(userData.options.productData);
 
-    fetch("https://m.mirrar.com//api/v1/login", {
-      method: "POST",
-      headers: new Headers({
-        "Content-Type": "application/x-www-form-urlencoded", // <-- Specifying the Content-Type
-      }),
-      body: body, // <-- Post parameters
-    })
-      .then((response) => {
-        
-        if (!response.ok) {
-          Alert.alert("ERROR", "Username or password is incorrect");
-        } else {
-          return response.json().then((json) => {
-            c
+for (let i = 0; i < userKeys.length; i++) {
 
-            var userData = JSON.parse(jsonData);
-            var length1 = Object.keys(json.data.active_product_codes).length;
+           keysArray.push(userKeys[i]);
+            //check in values
+            var valueArray = [] ;
 
-            var apiKeys = Object.keys(json.data.active_product_codes);
-            var apiValues = Object.values(json.data.active_product_codes);
+            for(let k=0;k<userValues[i].items.length;k++){
 
-            var userKeys = Object.keys(userData.options.productData);
-            var userValues = Object.values(userData.options.productData);
+                    valueArray.push(userValues[i].items[k])
 
-            for (let i = 0; i < userKeys.length; i++) {
-              for (let j = 0; j < apiKeys.length; j++) {
-                if (userKeys[i] == apiKeys[j]) {
-                  keysArray.push(userKeys[i]);
-                  //check in values
-                  var valueArray = [];
 
-                  for (let k = 0; k < userValues[i].items.length; k++) {
-                    for (let x = 0; x < apiValues[j].items.length; x++) {
-                      if (userValues[i].items[k] == apiValues[j].items[x]) {
-                        valueArray.push(userValues[i].items[k]);
-                      }
-                    }
-                  }
-                  if (valueArray.length > 0) {
-                    valuesArray.push(valueArray);
-                  }
-                }
-              }
+            }
+            if(valueArray.length>0){
+              valuesArray.push(valueArray);
             }
 
-            var codes = [];
-            var baseUrl = "";
-            for (let i = 0; i < valuesArray.length; i++) {
-              codes.push("&" + keysArray[i] + "=");
-              for (let j = 0; j < valuesArray[i].length; j++) {
-                codes.push(valuesArray[i][j]);
-              }
-            }
 
-            var csv = codes
-              .toString()
-              .replace("[", "")
-              .replace("]", "")
-              .replace(", ", ",");
-            baseUrl =
-              "https://cdn.styledotme.com/general/mirrar.html?brand_id=" +
-              json.data.uuid +
-              csv +
-              "&sku=" +
-              codes[1].replace("=,", "=").replace(",&", "&");
-            this.setState({
-              basicUrl: baseUrl,
-              isLoading: false,
-            });
-          });
-        }
-      })
-      .catch((error) => {
-        console.error(error);
+
+}
+
+
+var codes=[];
+var baseUrl='';
+for(let i=0;i<valuesArray.length;i++){
+   codes.push('&'+keysArray[i]+'=');
+   for(let j=0;j<valuesArray[i].length;j++){
+     codes.push(valuesArray[i][j]);
+   }
+}
+console.log(codes);
+
+var csv = codes.toString().replace("[", "").replace("]", "").replace(", ", ",").replace("=,", "=").replace(",&", "&");
+ baseUrl = "https://cdn.styledotme.com/webpack/mirrar.html?brand_id=" +
+          uuid +
+          csv +
+          "&sku=" +
+          codes[(codes.length > 0) ? 1 : 0]+"&platform=android-sdk-reactnative";
+console.log(baseUrl);
+
+this.setState({
+       basicUrl :baseUrl,
+       isLoading:false,
       });
-  }
+        }
 
-  render() {
-    return (
-      <View style={{ flex: 1, padding: 0 }}>
-        {this.state.isLoading ? (
-          <Text
-            style={{
-              backgroundColor: "black",
-              position: "absolute",
-              fontSize: 18,
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              textAlignVertical: "center",
-              textAlign: "center",
-              alignItems: "center",
-            }}
-          >
-            Loading...
-          </Text>
-        ) : (
-          <WebView
-            geolocationEnabled={true}
-            mediaPlaybackRequiresUserAction={false}
-            javaScriptEnabled={true}
-            source={{ uri: this.state.basicUrl }}
-            style={{ marginTop: 0 }}
-          />
-        )}
-      </View>
-    );
-  }
+
+
+render(){
+
+
+      return (
+
+          <View style={{ flex: 1, padding: 0 }}>
+              {this.state.isLoading ? <Text style={{textAlignVertical: "center",textAlign: "center",}}>Hiiiz</Text>
+ :
+              (<WebView
+			geolocationEnabled={true}
+			mediaPlaybackRequiresUserAction={false}
+			javaScriptEnabled={true}
+			source={{ uri:this.state.basicUrl}}
+			style={{ marginTop: 0 }}
+			onMessage={event => {
+                const { data } = event.nativeEvent;
+
+                  var str = JSON.parse(data);
+                  var keys=Object.keys(str);
+                      var values=Object.values(str);
+
+                  if(values[0]=="details"){
+                        EventRegister.emit('details', values[1])
+                  }
+                  else if(values[0]=="whatsapp"){
+                        EventRegister.emit('whatsapp', values[1])
+                  }
+                  else if(values[0]=="download"){
+                       EventRegister.emit('download', values[1])
+                   }
+                   else if(values[0]=="wishlist"){
+                         EventRegister.emit('wishlist',values[1])
+                   }
+                    else if(values[0]=="unwishlist"){
+                           EventRegister.emit('unwishlist', values[1])
+                     }
+                  else if(values[0]=="cart"){
+                          EventRegister.emit('cart', values[1])
+                   }
+                  else if(values[0]=="remove_cart"){
+                          EventRegister.emit('remove_cart', values[1])
+                  }
+                    else if(values[0]=="remove_cart"){
+                           EventRegister.emit('remove_cart', values[1])
+                    }
+              }}
+              />
+              )}
+            </View>
+      );
+}
+
 }

@@ -12,8 +12,9 @@
   "dependencies": {
     "react": "^17.0.2",
     "react-native": "0.64.0",
+    "react-native-event-listeners": "^1.0.7",
     "react-native-gesture-handler": "^1.10.3",
-    "react-native-mirrar-sdk": "git+https://github.com/shivammaindola/react-native-mirrar-sdk.git",
+    "react-native-mirrar-sdk": "github:shivammaindola/react-native-mirrar-sdk",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-webview": "^11.3.2",
     "react-navigation": "^4.4.4",
