@@ -7,7 +7,7 @@ Virtual jewellery try-on SDK
 
 1. Install the package 
       ```
-      npm install git+https://github.com/shivammaindola/react-native-mirrar-sdk.git
+      npm install git+https://github.com/mirrar-sdm/mirrar-React-Native-SDK
       npm install
       ```
 
