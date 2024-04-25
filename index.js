@@ -69,7 +69,7 @@ for(let i=0;i<valuesArray.length;i++){
 console.log(codes);
 
 var csv = codes.toString().replace("[", "").replace("]", "").replace(", ", ",").replace("=,", "=").replace(",&", "&");
- baseUrl = "https://cdn.styledotme.com/webpack/mirrar.html?brand_id=" +
+ baseUrl = "https://cdn.mirrar.com/general/mirrar.html?brand_id=" +
           uuid +
           csv +
           "&sku=" +
