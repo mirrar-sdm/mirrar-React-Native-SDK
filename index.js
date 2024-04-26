@@ -1,7 +1,6 @@
 import React, { useEffect, useState, Component  } from 'react';
 import { FlatList, Text, View } from 'react-native';
 import WebView from 'react-native-webview'
-import { userName,password,jsonData } from './constants'
 import { EventRegister } from 'react-native-event-listeners'
 
 export default class App extends Component {
